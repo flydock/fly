@@ -4,6 +4,7 @@ ARG group
 ARG application
 ARG description
 ARG version
+ARG revision
 ARG repository
 ARG branch
 ARG commit
@@ -42,6 +43,7 @@ LABEL group="$group"
 LABEL application="$application"
 LABEL description="$description"
 LABEL version="$version"
+LABEL revision="$revision"
 LABEL repository="$repository"
 LABEL branch="$branch"
 LABEL commit="$commit"
@@ -80,6 +82,7 @@ ENV GROUP="$group"
 ENV APPLICATION="$application"
 ENV DESCRIPTION="$description"
 ENV VERSION="$version"
+ENV REVISION="$revision"
 ENV REPOSITORY="$repository"
 ENV BRANCH="$branch"
 ENV COMMIT="$commit"
@@ -117,9 +120,9 @@ ENV RUNNER_OS="$runner_os"
 RUN set -e\
  && apk update --no-cache\
  && apk upgrade --no-cache\
- && apk add --no-cache bash uuidgen curl wget busybox-extras python3 py3-yaml\
- && mkdir -p /conf /hook /over /pack /var/pack
+ && apk add --no-cache bash uuidgen curl wget busybox-extras\
+ && mkdir -p /conf /hook /over /pack
 
-WORKDIR /var/pack
+WORKDIR /pack
 
 ENTRYPOINT ["bash"]

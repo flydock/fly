@@ -5,7 +5,8 @@ set -e
 export GROUP="flypackdev"
 export APPLICATION="fly"
 export DESCRIPTION="Container Package Manager"
-export VERSION="$(git branch --show-current)-$(git rev-parse --short HEAD)"
+export VERSION="$(git branch --show-current)"
+export REVISION="$(git branch --show-current)-$(git rev-parse --short HEAD)"
 export REPOSITORY="https://github.com/flydock/fly.git"
 export BRANCH="$(git branch --show-current)"
 export COMMIT="$(git rev-parse HEAD)"
@@ -22,6 +23,7 @@ docker build --no-cache --file ./Dockerfile\
                         --build-arg application="$APPLICATION"\
                         --build-arg description="$DESCRIPTION"\
                         --build-arg version="$VERSION"\
+                        --build-arg revision="$REVISION"\
                         --build-arg repository="$REPOSITORY"\
                         --build-arg branch="$BRANCH"\
                         --build-arg commit="$COMMIT"\
@@ -55,9 +57,9 @@ docker build --no-cache --file ./Dockerfile\
                         --build-arg runner_arch="$RUNNER_ARCH"\
                         --build-arg runner_name="$RUNNER_NAME"\
                         --build-arg runner_os="$RUNNER_OS"\
-                        --tag $GROUP/$APPLICATION:$VERSION .
+                        --tag $GROUP/$APPLICATION:$REVISION .
 
 if [ "$1" == "push" ]; then
-  docker push $GROUP/$APPLICATION:$VERSION
+  docker push $GROUP/$APPLICATION:$REVISION
   docker rmi $(docker images --filter "label=build=$BUILD" -q)
 fi
