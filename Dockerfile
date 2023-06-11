@@ -121,10 +121,10 @@ RUN set -e\
  && apk update --no-cache\
  && apk upgrade --no-cache\
  && apk add --no-cache bash uuidgen curl wget busybox-extras\
- && mkdir -p /conf /hook /over /pack
+ && mkdir /act /conf /pack /param
 
-COPY --chmod=755 ./bin/flypack /bin/flypack
+COPY --chmod=755 ./bin/fly /bin/fly
 
 WORKDIR /pack
 
-ENTRYPOINT ["bash"]
+ENTRYPOINT ["/bin/fly"]
