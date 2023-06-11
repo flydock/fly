@@ -9,22 +9,24 @@ if [ "$1" == "show" ]; then
   exit 0
 fi
 
-echo "Fly Container Package."
-echo "------------------------------------------------"
-echo "Application: $APPLICATION"
-echo "Description: $DESCRIPTION"
-echo "Version: $VERSION"
-echo "Revision: $REVISION"
-echo "Repository: $REPOSITORY"
-echo "Branch: $BRANCH"
-echo "Commit: $COMMIT"
-echo "Build: $BUILD"
-echo "------------------------------------------------"
+echo "Fly Container Package Manager"
+echo "Version 1.0.0"
+echo "--------------------------------------------------"
+echo "Package:"
+echo "  Application: $APPLICATION"
+echo "  Description: $DESCRIPTION"
+echo "  Version: $VERSION"
+echo "  Revision: $REVISION"
+echo "  Repository: $REPOSITORY"
+echo "  Branch: $BRANCH"
+echo "  Commit: $COMMIT"
+echo "  Build: $BUILD"
+echo "--------------------------------------------------"
 echo "Config:"
 for FILE in /conf/*; do
   echo "  - $FILE";
 done
-echo "------------------------------------------------"
+echo "--------------------------------------------------"
 echo "Components:"
 cd /act
 for FILE in *; do
@@ -32,7 +34,7 @@ for FILE in *; do
   echo "      Parameters:"
   echo "      Actions:"
 done
-echo "------------------------------------------------"
+echo "--------------------------------------------------"
 
 if [ "$1" == "fly" ]; then
   echo "fly:"
