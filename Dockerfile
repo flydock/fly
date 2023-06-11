@@ -123,6 +123,8 @@ RUN set -e\
  && apk add --no-cache bash uuidgen curl wget busybox-extras\
  && mkdir -p /conf /hook /over /pack
 
+COPY --chmod=755 ./bin/flypack /bin/flypack
+
 WORKDIR /pack
 
 ENTRYPOINT ["bash"]
