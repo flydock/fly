@@ -2,7 +2,7 @@
 
 set -e
 
-export GROUP="flypackdev"
+export GROUP="flypack"
 export APPLICATION="fly"
 export DESCRIPTION="Container Package Manager"
 export VERSION="$(git branch --show-current)"
@@ -59,7 +59,9 @@ docker build --no-cache --file ./Dockerfile\
                         --build-arg runner_os="$RUNNER_OS"\
                         --tag $GROUP/$APPLICATION:$REVISION .
 
-if [ "$1" == "push" ]; then
-  docker push $GROUP/$APPLICATION:$REVISION
-  docker rmi $(docker images --filter "label=build=$BUILD" -q)
+if [ "$1" != "" ]; then
+  docker tag $GROUP/$APPLICATION:$REVISION $1/$GROUP/$APPLICATION:$REVISION
+  docker push $1/$GROUP/$APPLICATION:$REVISION
+  docker rmi $1/$GROUP/$APPLICATION:$REVISION
+  docker rmi $GROUP/$APPLICATION:$REVISION
 fi
