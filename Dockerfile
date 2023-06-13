@@ -81,6 +81,7 @@ LABEL github_workflow_sha="$github_workflow_sha"
 LABEL runner_arch="$runner_arch"
 LABEL runner_name="$runner_name"
 LABEL runner_os="$runner_os"
+LABEL fly_version="$version"
 
 ENV GROUP="$group"
 ENV APPLICATION="$application"
@@ -122,6 +123,7 @@ ENV GITHUB_WORKFLOW_SHA="$github_workflow_sha"
 ENV RUNNER_ARCH="$runner_arch"
 ENV RUNNER_NAME="$runner_name"
 ENV RUNNER_OS="$runner_os"
+ENV FLY_VERSION="$version"
 
 RUN set -e\
  && apk update --no-cache\

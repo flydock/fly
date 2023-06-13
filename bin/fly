@@ -10,7 +10,7 @@ if [ "$1" == "show" ]; then
 fi
 
 echo "Fly Container Package Manager"
-echo "Version 1.0.0"
+echo "Version $FLY_VERSION"
 echo "----------------------------------------------------------------"
 echo "Package:"
 echo "  Group:                $GROUP"
