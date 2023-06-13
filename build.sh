@@ -4,9 +4,11 @@ set -e
 
 export GROUP="flypack"
 export APPLICATION="fly"
-export DESCRIPTION="Container Package Manager"
 export VERSION="$(git branch --show-current)"
 export REVISION="$(git branch --show-current)-$(git rev-parse --short HEAD)"
+export DESCRIPTION="Container Package Manager"
+export COMPANY="KubFly, Inc."
+export WEB="https://kubfly.com/fly"
 export REPOSITORY="https://github.com/flydock/fly.git"
 export BRANCH="$(git branch --show-current)"
 export COMMIT="$(git rev-parse HEAD)"
@@ -21,9 +23,11 @@ export BUILD="$(uuidgen)"
 docker build --no-cache --file ./Dockerfile\
                         --build-arg group="$GROUP"\
                         --build-arg application="$APPLICATION"\
-                        --build-arg description="$DESCRIPTION"\
                         --build-arg version="$VERSION"\
                         --build-arg revision="$REVISION"\
+                        --build-arg description="$DESCRIPTION"\
+                        --build-arg company="$COMPANY"\
+                        --build-arg web="$WEB"\
                         --build-arg repository="$REPOSITORY"\
                         --build-arg branch="$BRANCH"\
                         --build-arg commit="$COMMIT"\

@@ -2,9 +2,11 @@ FROM alpine:3.18.0
 
 ARG group
 ARG application
-ARG description
 ARG version
 ARG revision
+ARG description
+ARG company
+ARG web
 ARG repository
 ARG branch
 ARG commit
@@ -41,9 +43,11 @@ ARG runner_os
 
 LABEL group="$group"
 LABEL application="$application"
-LABEL description="$description"
 LABEL version="$version"
 LABEL revision="$revision"
+LABEL description="$description"
+LABEL company="$company"
+LABEL web="$web"
 LABEL repository="$repository"
 LABEL branch="$branch"
 LABEL commit="$commit"
@@ -80,9 +84,11 @@ LABEL runner_os="$runner_os"
 
 ENV GROUP="$group"
 ENV APPLICATION="$application"
-ENV DESCRIPTION="$description"
 ENV VERSION="$version"
 ENV REVISION="$revision"
+ENV DESCRIPTION="$description"
+ENV COMPANY="$company"
+ENV WEB="$web"
 ENV REPOSITORY="$repository"
 ENV BRANCH="$branch"
 ENV COMMIT="$commit"
