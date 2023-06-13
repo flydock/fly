@@ -2,19 +2,21 @@ FROM alpine:3.18.0
 
 ARG group
 ARG application
-ARG description
 ARG version
 ARG revision
+ARG description
+ARG company
+ARG web
 ARG repository
 ARG branch
 ARG commit
 ARG commit_before
 ARG commit_time
-ARG commit_timestamp
 ARG commit_message
 ARG commit_author
 ARG commit_author_email
 ARG build
+ARG build_time
 ARG github_action
 ARG github_action_repository
 ARG github_actor
@@ -41,19 +43,21 @@ ARG runner_os
 
 LABEL group="$group"
 LABEL application="$application"
-LABEL description="$description"
 LABEL version="$version"
 LABEL revision="$revision"
+LABEL description="$description"
+LABEL company="$company"
+LABEL web="$web"
 LABEL repository="$repository"
 LABEL branch="$branch"
 LABEL commit="$commit"
 LABEL commit_before="$commit_before"
 LABEL commit_time="$commit_time"
-LABEL commit_timestamp="$commit_timestamp"
 LABEL commit_message="$commit_message"
 LABEL commit_author="$commit_author"
 LABEL commit_author_email="$commit_author_email"
 LABEL build="$build"
+LABEL build_time="$build_time"
 LABEL github_action="$github_action"
 LABEL github_action_repository="$github_action_repository"
 LABEL github_actor="$github_actor"
@@ -77,22 +81,25 @@ LABEL github_workflow_sha="$github_workflow_sha"
 LABEL runner_arch="$runner_arch"
 LABEL runner_name="$runner_name"
 LABEL runner_os="$runner_os"
+LABEL fly_version="$version"
 
 ENV GROUP="$group"
 ENV APPLICATION="$application"
-ENV DESCRIPTION="$description"
 ENV VERSION="$version"
 ENV REVISION="$revision"
+ENV DESCRIPTION="$description"
+ENV COMPANY="$company"
+ENV WEB="$web"
 ENV REPOSITORY="$repository"
 ENV BRANCH="$branch"
 ENV COMMIT="$commit"
 ENV COMMIT_BEFORE="$commit_before"
 ENV COMMIT_TIME="$commit_time"
-ENV COMMIT_TIMESTAMP="$commit_timestamp"
 ENV COMMIT_MESSAGE="$commit_message"
 ENV COMMIT_AUTHOR="$commit_author"
 ENV COMMIT_AUTHOR_EMAIL="$commit_author_email"
 ENV BUILD="$build"
+ENV BUILD_TIME="$build_time"
 ENV GITHUB_ACTION="$github_action"
 ENV GITHUB_ACTION_REPOSITORY="$github_action_repository"
 ENV GITHUB_ACTOR="$github_actor"
@@ -116,6 +123,7 @@ ENV GITHUB_WORKFLOW_SHA="$github_workflow_sha"
 ENV RUNNER_ARCH="$runner_arch"
 ENV RUNNER_NAME="$runner_name"
 ENV RUNNER_OS="$runner_os"
+ENV FLY_VERSION="$version"
 
 RUN set -e\
  && apk update --no-cache\
