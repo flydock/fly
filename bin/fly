@@ -30,17 +30,27 @@ echo "  Build:                $BUILD"
 echo "  Build Time:           $BUILD_TIME"
 echo "----------------------------------------------------------------"
 echo "Config:"
-for FILE in /conf/*; do
-  echo "  - $FILE";
+for CONF in /conf/*; do
+  echo "  - $CONF";
 done
 echo "----------------------------------------------------------------"
 echo "Components:"
 cd /act
-for FILE in *; do
-  echo "  * $FILE";
-  echo "      Parameters:"
-  echo "      Actions:"
+for COMP in *; do
+  echo "  * $COMP";
+  if [ "$COMP" != "*" ]; then
+    echo "      Actions:"
+    cd /act/$COMP
+    for ACT in *; do
+      echo "        $ACT"
+    done
+    echo "      Parameters:"
+    for PARAM in /param/$COMP/*; do
+      echo "        - $PARAM";
+    done
+  fi
 done
+cd /pack
 echo "----------------------------------------------------------------"
 
 if [ "$1" == "fly" ]; then
