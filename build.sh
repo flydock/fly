@@ -12,7 +12,6 @@ export WEB="https://kubfly.com/fly"
 export REPOSITORY="https://github.com/flydock/fly.git"
 export BRANCH="$(git branch --show-current)"
 export COMMIT="$(git rev-parse HEAD)"
-export COMMIT_BEFORE="$(git rev-parse HEAD^1)"
 export COMMIT_TIME="$(git show -s --format='%ci' HEAD)"
 export COMMIT_MESSAGE="$(git show -s --format='%B' HEAD)"
 export COMMIT_AUTHOR="$(git show -s --format='%an' HEAD)"
@@ -31,7 +30,6 @@ docker build --no-cache --file ./Dockerfile\
                         --build-arg repository="$REPOSITORY"\
                         --build-arg branch="$BRANCH"\
                         --build-arg commit="$COMMIT"\
-                        --build-arg commit_before="$COMMIT_BEFORE"\
                         --build-arg commit_time="$COMMIT_TIME"\
                         --build-arg commit_message="$COMMIT_MESSAGE"\
                         --build-arg commit_author="$COMMIT_AUTHOR"\

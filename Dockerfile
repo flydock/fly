@@ -10,7 +10,6 @@ ARG web
 ARG repository
 ARG branch
 ARG commit
-ARG commit_before
 ARG commit_time
 ARG commit_message
 ARG commit_author
@@ -51,7 +50,6 @@ LABEL web="$web"
 LABEL repository="$repository"
 LABEL branch="$branch"
 LABEL commit="$commit"
-LABEL commit_before="$commit_before"
 LABEL commit_time="$commit_time"
 LABEL commit_message="$commit_message"
 LABEL commit_author="$commit_author"
@@ -93,7 +91,6 @@ ENV WEB="$web"
 ENV REPOSITORY="$repository"
 ENV BRANCH="$branch"
 ENV COMMIT="$commit"
-ENV COMMIT_BEFORE="$commit_before"
 ENV COMMIT_TIME="$commit_time"
 ENV COMMIT_MESSAGE="$commit_message"
 ENV COMMIT_AUTHOR="$commit_author"
