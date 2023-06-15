@@ -2,7 +2,7 @@
 
 set -e
 
-export GROUP="flypack"
+export GROUP="flydock"
 export APPLICATION="fly"
 export VERSION="$(git branch --show-current)"
 export REVISION="$(git branch --show-current)-$(git rev-parse --short HEAD)"
