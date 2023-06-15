@@ -34,18 +34,18 @@ for CONF in /conf/*; do
   echo "  - $CONF";
 done
 echo "----------------------------------------------------------------"
-echo "Components:"
+echo "Stage:"
 cd /act
-for COMP in *; do
-  echo "  * $COMP";
-  if [ "$COMP" != "*" ]; then
-    echo "      Actions:"
-    cd /act/$COMP
+for STAGE in *; do
+  echo "  * $STAGE";
+  if [ "$STAGE" != "*" ]; then
+    echo "      Action:"
+    cd /act/$STAGE
     for ACT in *; do
       echo "        $ACT"
     done
     echo "      Parameters:"
-    for PARAM in /param/$COMP/*; do
+    for PARAM in /param/$STAGE/*; do
       echo "        - $PARAM";
     done
   fi
@@ -54,27 +54,47 @@ cd /pack
 echo "----------------------------------------------------------------"
 
 if [ "$1" == "fly" ]; then
-  echo "fly:"
-  echo "  COMPONENT:  $2"
-  echo "  ACTION:     $3"
-  echo "  ARGUMENTS:  ${@:4}"
-  echo ""
-  cd /pack/$2
-  /act/$2/$3 ${@:4}
+  if [ "$2" != "all" ]; then
+    echo "fly:"
+    echo "  Stage: $2"
+    echo "  Action: $3"
+    echo "  Arguments: ${@:4}"
+    echo ""
+    cd /pack/$2
+    /act/$2/$3 ${@:4}
+    echo "----------------------------------------------------------------"
+  else
+    cd /act
+    for STAGE in *; do
+      echo "fly:"
+      echo "  Stage: $STAGE"
+      echo "  Action: $3"
+      echo "  Arguments: ${@:4}"
+      echo ""
+      cd /pack/$STAGE
+      /act/$STAGE/$3 ${@:4}
+      echo "----------------------------------------------------------------"
+    done
+    cd /pack
+  fi
 elif [ "$1" == "bash" ]; then
   echo "bash:"
-  echo ""
   bash ${@:2}
 else
   echo "help:"
+  echo "  Command:"
+  echo "    fly - run an action on the specified/all stage(s):"
+  echo "          docker run -it -v conf:/conf -v param:/param IMAGE fly STAGE ACTION [ARGUMENTS]"
+  echo "          docker run -it -v conf:/conf -v param:/param IMAGE fly all ACTION [ARGUMENTS]"
   echo ""
-  echo "Usage:  docker run -it -v conf:/conf -v param:/param IMAGE COMMAND COMPONENT ACTION [ARGUMENTS]"
+  echo "    show - output the contents of the specified file:"
+  echo "           docker run -it IMAGE show FILE"
   echo ""
-  echo "Commands:"
-  echo "  fly         Run an action on the specified component"
-  echo "  show        Output the contents of the specified file"
-  echo "  bash        Enter an interactive shell"
-  echo "  help        Get this help"
+  echo "    bash - enter an interactive shell:"
+  echo "           docker run -it IMAGE bash [ARGUMENTS]"
+  echo ""
+  echo "    help - get this help:"
+  echo "           docker run -it IMAGE help"
   if [ $# -eq 0 ] || [ "$1" == "help" ]; then
     echo ""
   else
