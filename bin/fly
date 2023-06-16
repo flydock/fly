@@ -77,24 +77,24 @@ if [ "$1" == "fly" ]; then
     done
     cd /pack
   fi
-elif [ "$1" == "bash" ]; then
-  echo "bash:"
-  bash ${@:2}
+elif [ "$1" == "shell" ]; then
+  echo "shell:"
+  /bin/bash ${@:2}
 else
   echo "help:"
   echo "  Command:"
-  echo "    fly - run an action on the specified/all stage(s):"
-  echo "          docker run -it -v conf:/conf -v param:/param IMAGE fly STAGE ACTION [ARGUMENTS]"
-  echo "          docker run -it -v conf:/conf -v param:/param IMAGE fly all ACTION [ARGUMENTS]"
+  echo "    fly   - run an action on the specified/all stage(s):"
+  echo "            docker run -it -v conf:/conf -v param:/param IMAGE fly STAGE ACTION [ARGUMENTS]"
+  echo "            docker run -it -v conf:/conf -v param:/param IMAGE fly all ACTION [ARGUMENTS]"
   echo ""
-  echo "    show - output the contents of the specified file:"
-  echo "           docker run -it IMAGE show FILE"
+  echo "    show  - output the contents of the specified file:"
+  echo "            docker run -it IMAGE show FILE"
   echo ""
-  echo "    bash - enter an interactive shell:"
-  echo "           docker run -it IMAGE bash [ARGUMENTS]"
+  echo "    shell - enter an interactive shell:"
+  echo "            docker run -it IMAGE bash [ARGUMENTS]"
   echo ""
-  echo "    help - get this help:"
-  echo "           docker run -it IMAGE help"
+  echo "    help  - get this help:"
+  echo "            docker run -it IMAGE help"
   if [ $# -eq 0 ] || [ "$1" == "help" ]; then
     echo ""
   else
