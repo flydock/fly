@@ -26,6 +26,7 @@ export BUILD_TIME="$(date +"%Y-%m-%d %H:%M:%S %z")"
 export OS="linux"
 export ARCH="$1"
 
+export DOCKER_BUILDKIT="1"
 docker build --no-cache --file ./Dockerfile --platform $OS/$ARCH\
                         --build-arg group="$GROUP"\
                         --build-arg application="$APPLICATION"\
