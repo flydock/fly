@@ -43,6 +43,8 @@ docker build --no-cache --file ./Dockerfile --platform $OS/$ARCH\
                         --build-arg commit_author_email="$COMMIT_AUTHOR_EMAIL"\
                         --build-arg build="$BUILD"\
                         --build-arg build_time="$BUILD_TIME"\
+                        --build-arg os="$OS"\
+                        --build-arg arch="$ARCH"\
                         --tag $GROUP/$APPLICATION:$REVISION .
 
 if [ "$2" != "" ]; then
