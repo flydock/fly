@@ -16,6 +16,8 @@ ARG commit_author
 ARG commit_author_email
 ARG build
 ARG build_time
+ARG os
+ARG arch
 
 LABEL group="$group"
 LABEL application="$application"
@@ -33,6 +35,8 @@ LABEL commit_author="$commit_author"
 LABEL commit_author_email="$commit_author_email"
 LABEL build="$build"
 LABEL build_time="$build_time"
+LABEL os="$os"
+LABEL arch="$arch"
 LABEL fly_version="$version"
 
 ENV GROUP="$group"
@@ -51,6 +55,8 @@ ENV COMMIT_AUTHOR="$commit_author"
 ENV COMMIT_AUTHOR_EMAIL="$commit_author_email"
 ENV BUILD="$build"
 ENV BUILD_TIME="$build_time"
+ENV OS="$os"
+ENV ARCH="$arch"
 ENV FLY_VERSION="$version"
 
 RUN set -e\
