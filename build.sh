@@ -2,6 +2,11 @@
 
 set -e
 
+if [ "$1" != "amd64" ] && [ "$1" != "arm64" ]; then
+  echo "./build.sh amd64|arm64"
+  exit 1
+fi
+
 export GROUP="flydock"
 export APPLICATION="fly"
 export VERSION="$(git branch --show-current)"
@@ -18,8 +23,10 @@ export COMMIT_AUTHOR="$(git show -s --format='%an' HEAD)"
 export COMMIT_AUTHOR_EMAIL="$(git show -s --format='%ae' HEAD)"
 export BUILD="$(uuidgen)"
 export BUILD_TIME="$(date +"%Y-%m-%d %H:%M:%S %z")"
+export OS="linux"
+export ARCH="$1"
 
-docker build --no-cache --file ./Dockerfile\
+docker build --no-cache --file ./Dockerfile --platform $OS/$ARCH\
                         --build-arg group="$GROUP"\
                         --build-arg application="$APPLICATION"\
                         --build-arg version="$VERSION"\
@@ -38,9 +45,9 @@ docker build --no-cache --file ./Dockerfile\
                         --build-arg build_time="$BUILD_TIME"\
                         --tag $GROUP/$APPLICATION:$REVISION .
 
-if [ "$1" != "" ]; then
-  docker tag $GROUP/$APPLICATION:$REVISION $1/$GROUP/$APPLICATION:$REVISION
-  docker push $1/$GROUP/$APPLICATION:$REVISION
-  docker rmi $1/$GROUP/$APPLICATION:$REVISION
+if [ "$2" != "" ]; then
+  docker tag $GROUP/$APPLICATION:$REVISION $2/$GROUP/$APPLICATION:$REVISION
+  docker push $2/$GROUP/$APPLICATION:$REVISION
+  docker rmi $2/$GROUP/$APPLICATION:$REVISION
   docker rmi $GROUP/$APPLICATION:$REVISION
 fi
