@@ -28,6 +28,8 @@ echo "  Commit Author:        $COMMIT_AUTHOR"
 echo "  Commit Author Email:  $COMMIT_AUTHOR_EMAIL"
 echo "  Build:                $BUILD"
 echo "  Build Time:           $BUILD_TIME"
+echo "  OS:                   $OS"
+echo "  Arch:                 $ARCH"
 echo "----------------------------------------------------------------"
 echo "Config:"
 for CONF in /conf/*; do
