@@ -33,7 +33,6 @@ LABEL commit_author="$commit_author"
 LABEL commit_author_email="$commit_author_email"
 LABEL build="$build"
 LABEL build_time="$build_time"
-LABEL fly_version="$version"
 
 ENV GROUP="$group"
 ENV APPLICATION="$application"
@@ -51,18 +50,3 @@ ENV COMMIT_AUTHOR="$commit_author"
 ENV COMMIT_AUTHOR_EMAIL="$commit_author_email"
 ENV BUILD="$build"
 ENV BUILD_TIME="$build_time"
-ENV FLY_VERSION="$version"
-
-RUN set -e\
- && apk update --no-cache\
- && apk upgrade --no-cache\
- && apk add --no-cache bash uuidgen curl wget busybox-extras\
- && mkdir /act /conf /out /pack /param /templ
-
-COPY --chmod=755 ./bin/fly /bin/fly
-COPY --chmod=644 ./templ/Dockerfile /templ/Dockerfile
-COPY --chmod=755 ./templ/build.sh /templ/build.sh
-
-WORKDIR /pack
-
-ENTRYPOINT ["/bin/fly"]
