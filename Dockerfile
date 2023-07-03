@@ -5,6 +5,7 @@ ARG application
 ARG version
 ARG revision
 ARG description
+ARG license
 ARG company
 ARG web
 ARG repository
@@ -18,12 +19,14 @@ ARG build
 ARG build_time
 ARG os
 ARG arch
+ARG dependencies
 
 LABEL group="$group"
 LABEL application="$application"
 LABEL version="$version"
 LABEL revision="$revision"
 LABEL description="$description"
+LABEL license="$license"
 LABEL company="$company"
 LABEL web="$web"
 LABEL repository="$repository"
@@ -37,6 +40,7 @@ LABEL build="$build"
 LABEL build_time="$build_time"
 LABEL os="$os"
 LABEL arch="$arch"
+LABEL dependencies="$dependencies"
 LABEL fly_version="$version"
 
 ENV GROUP="$group"
@@ -44,6 +48,7 @@ ENV APPLICATION="$application"
 ENV VERSION="$version"
 ENV REVISION="$revision"
 ENV DESCRIPTION="$description"
+ENV LICENSE="$license"
 ENV COMPANY="$company"
 ENV WEB="$web"
 ENV REPOSITORY="$repository"
@@ -57,12 +62,13 @@ ENV BUILD="$build"
 ENV BUILD_TIME="$build_time"
 ENV OS="$os"
 ENV ARCH="$arch"
+ENV DEPENDENCIES="$dependencies"
 ENV FLY_VERSION="$version"
 
 RUN set -e\
  && apk update --no-cache\
  && apk upgrade --no-cache\
- && apk add --no-cache bash uuidgen curl wget busybox-extras\
+ && apk add --no-cache bash uuidgen curl wget busybox-extras minio-client postgresql15-client\
  && mkdir /act /conf /out /pack /param /templ
 
 COPY --chmod=755 ./bin/fly /bin/fly
