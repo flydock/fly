@@ -68,7 +68,7 @@ ENV FLY_VERSION="$version"
 RUN set -e\
  && apk update --no-cache\
  && apk upgrade --no-cache\
- && apk add --no-cache bash uuidgen curl wget busybox-extras\
+ && apk add --no-cache bash uuidgen curl wget busybox-extras minio-client postgresql15-client\
  && mkdir /act /conf /out /pack /param /templ
 
 COPY --chmod=755 ./bin/fly /bin/fly
