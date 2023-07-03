@@ -12,6 +12,7 @@ export APPLICATION="fly"
 export VERSION="$(git branch --show-current)"
 export REVISION="$(git branch --show-current)-$(git rev-parse --short HEAD)"
 export DESCRIPTION="Container Package Manager"
+export LICENSE="Apache License 2.0"
 export COMPANY="KubFly, Inc."
 export WEB="https://kubfly.com/fly"
 export REPOSITORY="https://github.com/flydock/fly.git"
@@ -25,6 +26,7 @@ export BUILD="$(uuidgen)"
 export BUILD_TIME="$(date +"%Y-%m-%d %H:%M:%S %z")"
 export OS="linux"
 export ARCH="$1"
+export DEPENDENCIES="[]"
 
 export DOCKER_BUILDKIT="1"
 docker build --no-cache --file ./Dockerfile --platform $OS/$ARCH\
@@ -33,6 +35,7 @@ docker build --no-cache --file ./Dockerfile --platform $OS/$ARCH\
                         --build-arg version="$VERSION"\
                         --build-arg revision="$REVISION"\
                         --build-arg description="$DESCRIPTION"\
+                        --build-arg license="$LICENSE"\
                         --build-arg company="$COMPANY"\
                         --build-arg web="$WEB"\
                         --build-arg repository="$REPOSITORY"\
@@ -46,6 +49,7 @@ docker build --no-cache --file ./Dockerfile --platform $OS/$ARCH\
                         --build-arg build_time="$BUILD_TIME"\
                         --build-arg os="$OS"\
                         --build-arg arch="$ARCH"\
+                        --build-arg dependencies="$DEPENDENCIES"\
                         --tag $GROUP/$APPLICATION:$REVISION .
 
 if [ "$2" != "" ]; then
