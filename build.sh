@@ -28,36 +28,32 @@ export OS="linux"
 export ARCH="$1"
 export DEPENDENCIES="[]"
 
-docker buildx build --no-cache --file ./Dockerfile --platform $OS/$ARCH\
-                    --build-arg group="$GROUP"\
-                    --build-arg application="$APPLICATION"\
-                    --build-arg version="$VERSION"\
-                    --build-arg revision="$REVISION"\
-                    --build-arg description="$DESCRIPTION"\
-                    --build-arg license="$LICENSE"\
-                    --build-arg company="$COMPANY"\
-                    --build-arg web="$WEB"\
-                    --build-arg repository="$REPOSITORY"\
-                    --build-arg branch="$BRANCH"\
-                    --build-arg commit="$COMMIT"\
-                    --build-arg commit_time="$COMMIT_TIME"\
-                    --build-arg commit_message="$COMMIT_MESSAGE"\
-                    --build-arg commit_author="$COMMIT_AUTHOR"\
-                    --build-arg commit_author_email="$COMMIT_AUTHOR_EMAIL"\
-                    --build-arg build="$BUILD"\
-                    --build-arg build_time="$BUILD_TIME"\
-                    --build-arg os="$OS"\
-                    --build-arg arch="$ARCH"\
-                    --build-arg dependencies="$DEPENDENCIES"\
-                    --tag $GROUP/$APPLICATION:$REVISION\
-                    --tag $GROUP/$APPLICATION:$VERSION\
-                    --tag $GROUP/$APPLICATION:latest .
+podman build --no-cache --file ./Dockerfile --platform $OS/$ARCH\
+                        --build-arg group="$GROUP"\
+                        --build-arg application="$APPLICATION"\
+                        --build-arg version="$VERSION"\
+                        --build-arg revision="$REVISION"\
+                        --build-arg description="$DESCRIPTION"\
+                        --build-arg license="$LICENSE"\
+                        --build-arg company="$COMPANY"\
+                        --build-arg web="$WEB"\
+                        --build-arg repository="$REPOSITORY"\
+                        --build-arg branch="$BRANCH"\
+                        --build-arg commit="$COMMIT"\
+                        --build-arg commit_time="$COMMIT_TIME"\
+                        --build-arg commit_message="$COMMIT_MESSAGE"\
+                        --build-arg commit_author="$COMMIT_AUTHOR"\
+                        --build-arg commit_author_email="$COMMIT_AUTHOR_EMAIL"\
+                        --build-arg build="$BUILD"\
+                        --build-arg build_time="$BUILD_TIME"\
+                        --build-arg os="$OS"\
+                        --build-arg arch="$ARCH"\
+                        --build-arg dependencies="$DEPENDENCIES"\
+                        --tag $GROUP/$APPLICATION:$REVISION .
 
 if [ "$2" != "" ]; then
-  docker tag $GROUP/$APPLICATION:$REVISION $2/$GROUP/$APPLICATION:$REVISION
-  docker tag $GROUP/$APPLICATION:$VERSION $2/$GROUP/$APPLICATION:$VERSION
-  docker tag $GROUP/$APPLICATION:latest $2/$GROUP/$APPLICATION:latest
-  docker rmi $GROUP/$APPLICATION:$REVISION $GROUP/$APPLICATION:$VERSION $GROUP/$APPLICATION:latest
-  docker push --all-tags $2/$GROUP/$APPLICATION
-  docker rmi $2/$GROUP/$APPLICATION:$REVISION $2/$GROUP/$APPLICATION:$VERSION $2/$GROUP/$APPLICATION:latest
+  podman tag $GROUP/$APPLICATION:$REVISION $2/$GROUP/$APPLICATION:$REVISION
+  podman push $2/$GROUP/$APPLICATION:$REVISION
+  podman rmi $2/$GROUP/$APPLICATION:$REVISION
+  podman rmi $GROUP/$APPLICATION:$REVISION
 fi
