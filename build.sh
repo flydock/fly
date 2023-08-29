@@ -28,7 +28,7 @@ export OS="linux"
 export ARCH="$1"
 export DEPENDENCIES="[]"
 
-docker buildx build --no-cache --file ./Dockerfile --platform $OS/$ARCH\
+podman buildx build --no-cache --file ./Dockerfile --platform $OS/$ARCH\
                     --build-arg group="$GROUP"\
                     --build-arg application="$APPLICATION"\
                     --build-arg version="$VERSION"\
@@ -52,8 +52,8 @@ docker buildx build --no-cache --file ./Dockerfile --platform $OS/$ARCH\
                     --tag $GROUP/$APPLICATION:$REVISION .
 
 if [ "$2" != "" ]; then
-  docker tag $GROUP/$APPLICATION:$REVISION $2/$GROUP/$APPLICATION:$REVISION
-  docker push $2/$GROUP/$APPLICATION:$REVISION
-  docker rmi $2/$GROUP/$APPLICATION:$REVISION
-  docker rmi $GROUP/$APPLICATION:$REVISION
+  podman tag $GROUP/$APPLICATION:$REVISION $2/$GROUP/$APPLICATION:$REVISION
+  podman push $2/$GROUP/$APPLICATION:$REVISION
+  podman rmi $2/$GROUP/$APPLICATION:$REVISION
+  podman rmi $GROUP/$APPLICATION:$REVISION
 fi
