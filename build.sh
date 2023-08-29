@@ -49,15 +49,11 @@ docker buildx build --no-cache --file ./Dockerfile --platform $OS/$ARCH\
                     --build-arg os="$OS"\
                     --build-arg arch="$ARCH"\
                     --build-arg dependencies="$DEPENDENCIES"\
-                    --tag $GROUP/$APPLICATION:$REVISION\
-                    --tag $GROUP/$APPLICATION:$VERSION\
-                    --tag $GROUP/$APPLICATION:latest .
+                    --tag $GROUP/$APPLICATION:$REVISION .
 
 if [ "$2" != "" ]; then
   docker tag $GROUP/$APPLICATION:$REVISION $2/$GROUP/$APPLICATION:$REVISION
-  docker tag $GROUP/$APPLICATION:$VERSION $2/$GROUP/$APPLICATION:$VERSION
-  docker tag $GROUP/$APPLICATION:latest $2/$GROUP/$APPLICATION:latest
-  docker rmi $GROUP/$APPLICATION:$REVISION $GROUP/$APPLICATION:$VERSION $GROUP/$APPLICATION:latest
-  docker push --all-tags $2/$GROUP/$APPLICATION
-  docker rmi $2/$GROUP/$APPLICATION:$REVISION $2/$GROUP/$APPLICATION:$VERSION $2/$GROUP/$APPLICATION:latest
+  docker push $2/$GROUP/$APPLICATION:$REVISION
+  docker rmi $2/$GROUP/$APPLICATION:$REVISION
+  docker rmi $GROUP/$APPLICATION:$REVISION
 fi
